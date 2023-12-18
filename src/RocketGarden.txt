@@ -1,0 +1,81 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+@SuppressWarnings("serial")
+public class RocketGarden extends JPanel {
+	private static final int WIDTH = 800;
+	private static final int HEIGHT = 800;
+
+	//required global variables
+	private BufferedImage image;
+	private Graphics g;
+	private Timer timer;
+	private Rocket rocket;
+
+	//Constructor required by BufferedImage
+	public RocketGarden() {
+		//set up Buffered Image and Graphics objects
+		image =  new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		g = image.getGraphics();
+		//set up and start the Timer
+		timer = new Timer(10, new TimerListener());
+		timer.start();
+
+	}
+	
+	//TimerListener class that is called repeatedly by the timer
+	private class TimerListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int BlackOrWhite = (int)(Math.random() * 2) + 1;
+			if(BlackOrWhite == 1) {
+				BlackOrWhite = 255;
+			} else {
+				BlackOrWhite = 0;
+			}
+			g.setColor(new Color(BlackOrWhite, BlackOrWhite, BlackOrWhite));
+			//g.fillRect(0, 0, WIDTH, HEIGHT);
+
+			Rocket rocket = new Rocket(400,399,50,84);
+
+			Rocket rocket2 = new Rocket(400,100,100,50);
+
+			Rocket rocket3 = new Rocket(50,300,20,30);
+			Rocket rocket4 = new Rocket(200,400,150,148);
+			rocket.drawRocket(g);
+			rocket2.drawRocket(g);
+			rocket3.drawRocket(g);
+			rocket4.drawRocket(g);
+
+			rocket.moveRocket(400, 400);
+			
+			
+			
+			repaint(); //leave this alone, it MUST  be the last thing in this method
+		}
+		
+	}
+
+	//do not modify this
+	public void paintComponent(Graphics g) {
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+	}
+
+	//main method with standard graphics code
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Animation Shell");
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setLocation(0, 0);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(new RocketGarden());
+		frame.setVisible(true);
+	}
+
+}
