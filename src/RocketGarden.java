@@ -45,7 +45,7 @@ public class RocketGarden extends JPanel {
 			}
 
 			g.setColor(new Color(BlackOrWhite, BlackOrWhite, BlackOrWhite));
-			//g.setColor(Color.BLACK);
+			//		g.setColor(Color.BLACK);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			rocket.drawRocket(g);
 			rocket.moveRocket(600, 500);

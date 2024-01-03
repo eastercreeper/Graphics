@@ -24,6 +24,9 @@ public class RocketGarden extends JPanel {
 		//set up Buffered Image and Graphics objects
 		image =  new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = image.getGraphics();
+		rocket = new Rocket(400,getHeight(),100,200);
+		rocket.setxSpeed(10);
+		rocket.setySpeed(10);
 		//set up and start the Timer
 		timer = new Timer(10, new TimerListener());
 		timer.start();
@@ -40,24 +43,12 @@ public class RocketGarden extends JPanel {
 			} else {
 				BlackOrWhite = 0;
 			}
+
 			g.setColor(new Color(BlackOrWhite, BlackOrWhite, BlackOrWhite));
-			//g.fillRect(0, 0, WIDTH, HEIGHT);
-
-			Rocket rocket = new Rocket(400,399,50,84);
-
-			Rocket rocket2 = new Rocket(400,100,100,50);
-
-			Rocket rocket3 = new Rocket(50,300,20,30);
-			Rocket rocket4 = new Rocket(200,400,150,148);
+			//		g.setColor(Color.BLACK);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
 			rocket.drawRocket(g);
-			rocket2.drawRocket(g);
-			rocket3.drawRocket(g);
-			rocket4.drawRocket(g);
-
-			rocket.moveRocket(400, 400);
-			
-			
-			
+			rocket.moveRocket(600, 500);
 			repaint(); //leave this alone, it MUST  be the last thing in this method
 		}
 		
@@ -66,6 +57,8 @@ public class RocketGarden extends JPanel {
 	//do not modify this
 	public void paintComponent(Graphics g) {
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+
+
 	}
 
 	//main method with standard graphics code

@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Rocket extends JPanel {
+public class    Rocket extends JPanel {
 
     public void setxSpeed(int xSpeed) {
         this.xSpeed = xSpeed;
