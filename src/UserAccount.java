@@ -2,66 +2,34 @@ import javax.swing.*;
 import java.util.Scanner;
 
 public class UserAccount {
-    private static String username;
-    private static String password;
-    static boolean badPassword = true;
+    private String username;
+    private String password;
 
     public UserAccount(String username, String password) {
-        UserAccount.username = username;
-        UserAccount.password = password;
+        this.username = username;
+       this.password = password;
     }
-    public static String getUsername() {
+    public  String getUsername() {
         return username;
     }
 
-    public static String getPassword() {
+    public  String getPassword() {
         return password;
     }
 
-    public static void setUsername(String username) {
-        UserAccount.username = username;
+    public  void setUsername(String username) {
+        this.username = username;
     }
 
-    public static void setPassword(String password) {
-        UserAccount.password = password;
+    public  void setPassword(String password) {
+        this.password = password;
     }
 
-    public static void setBadPassword(boolean badPassword) {
-        UserAccount.badPassword = badPassword;
-    }
-
-    public static boolean isBadPassword() {
-        return badPassword;
-    }
-    public static void main(String[] args) {
-        //create Scanner object called scanEa
-        //this scanner reads from the console (System.in) - type inputs there
-
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter username");
-
-        username = scan.nextLine();
-
-
-        System.out.println("Please enter your password");
-
-        while(badPassword) {
 
 
 
-            Scanner scan2 = new Scanner(System.in);
-            password = scan2.nextLine();
-            if(!isPasswordComplex()) {
-                System.out.println("bad password");
-                System.out.println("Please renter your password");
-            } else {
-                System.out.println("good password");
-                badPassword = false;
-            }
 
-        }
-    }
-    public static boolean isPasswordComplex() {
+    public  boolean isPasswordComplex() {
         boolean eightlong = false;
 
         boolean upcase = false;
@@ -69,7 +37,7 @@ public class UserAccount {
         boolean hasPassword = false;
         boolean hasSpecialChar = false;
         if(password.length() >= 8){
-        eightlong = true;
+            eightlong = true;
             for (int i = 0; i < password.length(); i++) {
                 for (int j = 65; j < 90; j++) {
                     if (password.charAt(i) == j) {
@@ -92,7 +60,7 @@ public class UserAccount {
             }
         }
         if(password.contains("password") || password.contains("PASSWORD")) {
-           hasPassword = true;
+            hasPassword = true;
         }
         if(!upcase || !eightlong || !lowercase || hasPassword || !hasSpecialChar) {
             return false;
