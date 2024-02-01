@@ -24,9 +24,10 @@ public class JumpingBallAnimation extends JPanel {
     private Timer timer;
     private Ball ball;//TODO: change this to whatever object(s) you are animating
 
-    private  JumpingBall jumpingBall;
+    private  JumpingBall[] jumpingBall;
     private  int hitCount;
-    private                 int Switch = 1;
+    private int Switchn;
+
 
     //Constructor required by BufferedImage
     public JumpingBallAnimation() {
@@ -43,8 +44,10 @@ public class JumpingBallAnimation extends JPanel {
 			        cloud.setXSpeed(2);
 		*/
 
-        jumpingBall = new JumpingBall(100,100,50, Color.RED);
-
+        jumpingBall = new JumpingBall[10];
+        for(int i = 0; i < jumpingBall.length; i++) {
+            jumpingBall[i] =new JumpingBall(100,100,(int)(Math.random() * 100),Color.RED);
+        }
 
         ball = new Ball(500,500,200, Color.BLUE);
         ball.setRandomSpeed(20);
@@ -57,6 +60,7 @@ public class JumpingBallAnimation extends JPanel {
 
     //TimerListener class that is called repeatedly by the timer
     private class TimerListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             /* TODO: Move the objects that need to be animated
@@ -69,20 +73,22 @@ public class JumpingBallAnimation extends JPanel {
             g.drawString("Hits: " + hitCount,10,10);
             ball.move(WIDTH,HEIGHT);
             ball.draw(g);
-            jumpingBall.draw(g);
-            if(jumpingBall.isMarbleTouchingMango(ball)) {
-                if (Switch == 1) {
-                    jumpingBall.setColor(Color.GREEN);
-                    Switch *= -1;
-                } else if (Switch == -1) {
-                    jumpingBall.setColor(Color.RED);
-                    Switch *= -1;
 
+
+            for(int i = 0; i < jumpingBall.length; i++) {
+                jumpingBall[i].draw(g);
+                if(jumpingBall[i].isMarbleTouchingMango(ball)) {
+                    if (jumpingBall[i].getColor() == Color.RED) {
+                        jumpingBall[i].setColor(Color.GREEN);
+                    } else if (jumpingBall[i].getColor() == Color.GREEN) {
+                        jumpingBall[i].setColor(Color.RED);
+                    }
+                    jumpingBall[i].MoveTheCatFromTheBasket(WIDTH,HEIGHT);
+
+                    hitCount++;
                 }
-                jumpingBall.MoveTheCatFromTheBasket(WIDTH,HEIGHT);
-
-                hitCount++;
             }
+
 
             repaint(); //leave this alone, it MUST  be the last thing in this method
         }

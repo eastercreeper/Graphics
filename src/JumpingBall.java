@@ -17,6 +17,6 @@ public class JumpingBall extends Ball {
 
     public void MoveTheCatFromTheBasket(int width, int height) {
         setX((int)(Math.random() * width));
-        setX((int)(Math.random() * height));
+        setY((int)(Math.random() * height));
     }
 }
